@@ -1,4 +1,5 @@
 import React from 'react';
+import BoardContainer from './BoardContainer.jsx'
 
 class GameContainer extends React.Component {
 
@@ -14,7 +15,8 @@ class GameContainer extends React.Component {
     return(
 
       <div className="game-container">
-        This is our game container
+        
+        <BoardContainer />
       </div>
 
     )
