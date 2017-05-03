@@ -40,43 +40,46 @@ class BoardContainer extends React.Component {
 
     // const winConditions = [
 
-    // const x = this.state.board
+    let board = this.state.board
+    console.log(board)
 
-    // if (x[0] === "X" && x[1] === "X" && x[2] === "X"){
-    //   console.log("Yay!")
-    // }
+    if (
+      // Player X
+      // Horizontal
+      (board[0] === "X" && board[1] === "X" && board[2] === "X") ||
+      (board[3] === "X" && board[4] === "X" && board[5] === "X") ||
+      (board[6] === "X" && board[7] === "X" && board[8] === "X") ||
+      // Vertical
+      (board[0] === "X" && board[3] === "X" && board[6] === "X") ||
+      (board[1] === "X" && board[4] === "X" && board[7] === "X") ||
+      (board[2] === "X" && board[5] === "X" && board[8] === "X") ||
+      // Diagonal
+      (board[0] === "X" && board[4] === "X" && board[8] === "X") ||
+      (board[6] === "X" && board[4] === "X" && board[2] === "X")
 
-    // ["X", "X", "X", 
-    // null, null, null, 
-    // null, null, null],
+    ){
+      console.log("X Wins!")
+    }
+    else if (
+      // Player Y
+      // Horizontal
+      (board[0] === "O" && board[1] === "O" && board[2] === "O") ||
+      (board[3] === "O" && board[4] === "O" && board[5] === "O") ||
+      (board[6] === "O" && board[7] === "O" && board[8] === "O") ||
+      // Vertical
+      (board[0] === "O" && board[3] === "O" && board[6] === "O") ||
+      (board[1] === "O" && board[4] === "O" && board[7] === "O") ||
+      (board[2] === "O" && board[5] === "O" && board[8] === "O") ||
+      // Diagonal
+      (board[0] === "O" && board[4] === "O" && board[8] === "O") ||
+      (board[6] === "O" && board[4] === "O" && board[2] === "O")      
+    ){
+      console.log("O Wins!")
+    }
 
-    // [null, null, null, 
-    // "X", "X", "X", 
-    // null, null, null],
+  }
 
-    // [null, null, null, 
-    // null, null, null, 
-    // "X", "X", "X"],
-    
-    // ["X", "O", null, 
-    // "X", "O", null, 
-    // "X", "O", null],
-    
-    // [null, "X", null, 
-    // null, "X", null, 
-    // null, "X", null],
-
-    // [null, null, "X", 
-    // null, null, "X", 
-    // null, null, "X"],
-
-    // ["X", null, null, 
-    // null, "X", null, 
-    // null, null, "X"],
-    
-    // [null, null, "X", 
-    // null, "X", null, 
-    // "X", null, null],
+   
 
     // ]
 
@@ -90,8 +93,6 @@ class BoardContainer extends React.Component {
     //     alert("Player " + this.state.chosenLetter + " has won")    
     //   }
     // }.bind(this))
-
-  }
   
 
   whichClicked(value, playerType){

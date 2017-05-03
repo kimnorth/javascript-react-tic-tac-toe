@@ -5,14 +5,14 @@ class TileComponent extends React.Component {
  
   handleClick(){
 
-    this.props.passedWhichClicked(this.props.index, "x")
+    this.props.passedWhichClicked(this.props.index)
   }
 
 
   render(){
 
     return(
-      <div index={this.props.index} className="tile" onClick={this.handleClick.bind(this)}>
+      <div className="tile" onClick={this.handleClick.bind(this)}>
         {this.props.chosenLetter}
       </div>
       )
@@ -22,5 +22,3 @@ class TileComponent extends React.Component {
 }
 
 export default TileComponent;
-
-// {this.props.tilePositionOnBoard[this.props.value]}
