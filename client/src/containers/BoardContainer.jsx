@@ -1,5 +1,6 @@
 import React from 'react';
 import TileComponent from '../components/TileComponent.jsx'
+import EvaluateWin from '../models/EvaluateWin.js'
 
 class BoardContainer extends React.Component {
 
@@ -10,16 +11,18 @@ class BoardContainer extends React.Component {
     this.state = {
       board: [null, null, null, null, null, null, null, null, null],
       playerTurn: "Player A",
-      chosenLetter: ""
+      chosenLetter: null
     }
+    this.evaluateWin = new EvaluateWin()
   }
 
   whichLetter(){
+    // console.log("Current Letter:", this.state.chosenLetter)
     let chosenLetter = ""
     if(this.state.playerTurn === "Player A"){
       chosenLetter = "O"
     }
-    else {
+    else if (this.state.playerTurn === "Player B"){
       chosenLetter = "X"
     }
     this.setState({chosenLetter: chosenLetter})
@@ -37,72 +40,28 @@ class BoardContainer extends React.Component {
   }
 
   checkForWinner(){
-
-    // const winConditions = [
-
-    let board = this.state.board
-    console.log(board)
-
-    if (
-      // Player X
-      // Horizontal
-      (board[0] === "X" && board[1] === "X" && board[2] === "X") ||
-      (board[3] === "X" && board[4] === "X" && board[5] === "X") ||
-      (board[6] === "X" && board[7] === "X" && board[8] === "X") ||
-      // Vertical
-      (board[0] === "X" && board[3] === "X" && board[6] === "X") ||
-      (board[1] === "X" && board[4] === "X" && board[7] === "X") ||
-      (board[2] === "X" && board[5] === "X" && board[8] === "X") ||
-      // Diagonal
-      (board[0] === "X" && board[4] === "X" && board[8] === "X") ||
-      (board[6] === "X" && board[4] === "X" && board[2] === "X")
-
-    ){
-      console.log("X Wins!")
+    let gameOver = this.evaluateWin.evaluate(this.state.board, this.props.xScore, this.props.oScore)
+    if (gameOver){
+      this.setState({board: [null, null, null, null, null, null, null, null, null]})
     }
-    else if (
-      // Player Y
-      // Horizontal
-      (board[0] === "O" && board[1] === "O" && board[2] === "O") ||
-      (board[3] === "O" && board[4] === "O" && board[5] === "O") ||
-      (board[6] === "O" && board[7] === "O" && board[8] === "O") ||
-      // Vertical
-      (board[0] === "O" && board[3] === "O" && board[6] === "O") ||
-      (board[1] === "O" && board[4] === "O" && board[7] === "O") ||
-      (board[2] === "O" && board[5] === "O" && board[8] === "O") ||
-      // Diagonal
-      (board[0] === "O" && board[4] === "O" && board[8] === "O") ||
-      (board[6] === "O" && board[4] === "O" && board[2] === "O")      
-    ){
-      console.log("O Wins!")
-    }
-
   }
 
-   
-
-    // ]
-
-    //console.log(winConditions)
-
-    // winConditions.forEach(function(element){
-    //   console.log("element 4: ", winConditions[3])
-    //   console.log("state  ",this.state.board)
-    //   if (this.state.board == element){
-    //     console.log("SAME")
-    //     alert("Player " + this.state.chosenLetter + " has won")    
-    //   }
-    // }.bind(this))
-  
-
   whichClicked(value, playerType){
-    var board = this.state.board    
-    if (!board[value]){
+    // var board = this.state.board
+
+    // Letter and player are O
+
+    // If it doesn't have a value, add it and change the letter    
+    if (!this.state.board[value]){
+      // Set the board array with chosenLetter
+      this.state.board[value] = this.state.chosenLetter
+      this.setState({board: this.state.board})
+      console.log("Current Letter", this.state.chosenLetter)
       this.whichLetter()
-      board[value] = this.state.chosenLetter
-      this.setState({board: board})
+      console.log("Current Letter", this.state.chosenLetter)
       this.changePlayer()
     }
+
     this.checkForWinner()
     // console.log(value, playerType)
   }
@@ -134,8 +93,8 @@ class BoardContainer extends React.Component {
 
         <div className="flex-item">
           <TileComponent chosenLetter={this.state.board[2]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="2"/>
-        <TileComponent chosenLetter={this.state.board[5]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="5"/>
-        <TileComponent chosenLetter={this.state.board[8]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="8"/>
+          <TileComponent chosenLetter={this.state.board[5]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="5"/>
+          <TileComponent chosenLetter={this.state.board[8]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="8"/>
         </div>
       
 
