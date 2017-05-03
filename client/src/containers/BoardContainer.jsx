@@ -35,24 +35,75 @@ class BoardContainer extends React.Component {
     }
     this.setState({playerTurn: currentPlayer})
   }
+
+  checkForWinner(){
+
+    // const winConditions = [
+
+    // const x = this.state.board
+
+    // if (x[0] === "X" && x[1] === "X" && x[2] === "X"){
+    //   console.log("Yay!")
+    // }
+
+    // ["X", "X", "X", 
+    // null, null, null, 
+    // null, null, null],
+
+    // [null, null, null, 
+    // "X", "X", "X", 
+    // null, null, null],
+
+    // [null, null, null, 
+    // null, null, null, 
+    // "X", "X", "X"],
+    
+    // ["X", "O", null, 
+    // "X", "O", null, 
+    // "X", "O", null],
+    
+    // [null, "X", null, 
+    // null, "X", null, 
+    // null, "X", null],
+
+    // [null, null, "X", 
+    // null, null, "X", 
+    // null, null, "X"],
+
+    // ["X", null, null, 
+    // null, "X", null, 
+    // null, null, "X"],
+    
+    // [null, null, "X", 
+    // null, "X", null, 
+    // "X", null, null],
+
+    // ]
+
+    //console.log(winConditions)
+
+    // winConditions.forEach(function(element){
+    //   console.log("element 4: ", winConditions[3])
+    //   console.log("state  ",this.state.board)
+    //   if (this.state.board == element){
+    //     console.log("SAME")
+    //     alert("Player " + this.state.chosenLetter + " has won")    
+    //   }
+    // }.bind(this))
+
+  }
   
 
   whichClicked(value, playerType){
-    // pick the letter
-    
-    // update the board where they clicked
-    var board = this.state.board
-    
+    var board = this.state.board    
     if (!board[value]){
       this.whichLetter()
       board[value] = this.state.chosenLetter
       this.setState({board: board})
       this.changePlayer()
     }
-
-    console.log(value, playerType)
-    // change the current player
-    
+    this.checkForWinner()
+    // console.log(value, playerType)
   }
 
   handleResetClick(){
@@ -68,19 +119,21 @@ class BoardContainer extends React.Component {
 
         <div className="flex-item">
           <TileComponent chosenLetter={this.state.board[0]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="0"/>
-          <TileComponent chosenLetter={this.state.board[1]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="1"/>
+          <TileComponent chosenLetter={this.state.board[3]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="3"/>
+          <TileComponent chosenLetter={this.state.board[6]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="6"/>
+
+          
+        </div>
+
+        <div className="flex-item">
+           <TileComponent chosenLetter={this.state.board[1]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="1"/>
+          <TileComponent chosenLetter={this.state.board[4]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="4"/>
+          <TileComponent chosenLetter={this.state.board[7]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="7"/>
+        </div>
+
+        <div className="flex-item">
           <TileComponent chosenLetter={this.state.board[2]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="2"/>
-        </div>
-
-        <div className="flex-item">
-        <TileComponent chosenLetter={this.state.board[3]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="3"/>
-        <TileComponent chosenLetter={this.state.board[4]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="4"/>
         <TileComponent chosenLetter={this.state.board[5]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="5"/>
-        </div>
-
-        <div className="flex-item">
-        <TileComponent chosenLetter={this.state.board[6]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="6"/>
-        <TileComponent chosenLetter={this.state.board[7]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="7"/>
         <TileComponent chosenLetter={this.state.board[8]} playerTurn={this.state.playerTurn} passedWhichClicked={this.whichClicked} index="8"/>
         </div>
       
